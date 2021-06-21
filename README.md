@@ -1,15 +1,5 @@
 # flutter_float_window
 
-A new flutter plugin project.
+flutter_float_window是一个flutter的悬浮窗插件，具备悬浮窗权限申请等功能，目前还在更新中，Android端悬浮窗权限申请已完成。
 
-## Getting Started
-
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
 
