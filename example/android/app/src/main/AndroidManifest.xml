@@ -2,6 +2,7 @@
     package="com.example.flutter_float_window_example">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
 
     <application
         android:icon="@mipmap/ic_launcher"
