@@ -105,15 +105,18 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             ),
           ],
         ),
-        body: Wrap(
-          spacing: 10,
-          runSpacing: 10,
-          children: ["open", "hide", "show", "dismiss"].map((e) {
-            return ElevatedButton(
-              onPressed: () => action(e),
-              child: Text(e),
-            );
-          }).toList(),
+        body: Padding(
+          padding: EdgeInsets.all(10),
+          child: Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: ["open", "hide", "show", "dismiss"].map((e) {
+              return ElevatedButton(
+                onPressed: () => action(e),
+                child: Text(e),
+              );
+            }).toList(),
+          ),
         ),
       ),
     );
