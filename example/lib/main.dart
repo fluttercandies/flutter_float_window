@@ -64,6 +64,26 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     }
   }
 
+  void action(String value){
+    switch(value){
+      case "open":
+        FlutterFloatWindow.open();
+        break;
+      case "hide":
+        FlutterFloatWindow.hide();
+        break;
+      case "show":
+        FlutterFloatWindow.show();
+        break;
+      case "dismiss":
+        FlutterFloatWindow.dismiss();
+        break;
+      default:
+        print("未知事件");
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -85,8 +105,15 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             ),
           ],
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: Wrap(
+          spacing: 10,
+          runSpacing: 10,
+          children: ["open", "hide", "show", "dismiss"].map((e) {
+            return ElevatedButton(
+              onPressed: () => action(e),
+              child: Text(e),
+            );
+          }).toList(),
         ),
       ),
     );

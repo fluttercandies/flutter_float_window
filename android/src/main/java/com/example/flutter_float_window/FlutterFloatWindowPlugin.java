@@ -72,6 +72,18 @@ public class FlutterFloatWindowPlugin implements FlutterPlugin, MethodCallHandle
                     result.success(isRequestFloatPermission((Activity) context));
                 }
                 break;
+            case "open":
+                Log.e(TAG,"等待实现open");
+                break;
+            case "hide":
+                Log.e(TAG,"等待实现hide");
+                break;
+            case "show":
+                Log.e(TAG,"等待实现show");
+                break;
+            case "dismiss":
+                Log.e(TAG,"等待实现dismiss");
+                break;
             default:
                 result.notImplemented();
                 break;
