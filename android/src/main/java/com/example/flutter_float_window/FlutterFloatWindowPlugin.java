@@ -15,6 +15,7 @@ import android.os.Binder;
 import android.os.Build;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import androidx.annotation.NonNull;
 
 import com.lzf.easyfloat.EasyFloat;
 import com.lzf.easyfloat.enums.ShowPattern;
+import com.lzf.easyfloat.enums.SidePattern;
 
 import io.flutter.Log;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
@@ -76,12 +78,35 @@ public class FlutterFloatWindowPlugin implements FlutterPlugin, MethodCallHandle
                 }
                 break;
             case "open":
-                if (activity != null) {
-                    Log.e(TAG, "进入到里面,,activity != null");
-                    EasyFloat.with(activity).setLayout(R.layout.item).setShowPattern(ShowPattern.ALL_TIME).show();
-                } else {
-                    EasyFloat.with(context).setLayout(R.layout.item).setShowPattern(ShowPattern.ALL_TIME).show();
-                }
+                Activity okActivity = activity != null ? activity : (Activity) context;
+                EasyFloat.with(okActivity).setLayout(R.layout.item).setShowPattern(ShowPattern.ALL_TIME)
+                        // 设置吸附方式，共15种模式，详情参考SidePattern
+                        .setSidePattern(SidePattern.RESULT_HORIZONTAL)
+                        // 设置浮窗的标签，用于区分多个浮窗
+                        .setTag("testFloat")
+                        // 设置浮窗是否可拖拽
+                        .setDragEnable(true)
+                        // 浮窗是否包含EditText，默认不包含
+                        .hasEditText(false)
+                        // 设置浮窗固定坐标，ps：设置固定坐标，Gravity属性和offset属性将无效
+                        .setLocation(0, 300)
+                        // 设置浮窗的对齐方式和坐标偏移量
+                        .setGravity(Gravity.END | Gravity.CENTER_VERTICAL, 0, 200)
+                        // 设置当布局大小变化后，整体view的位置对齐方式
+                        .setLayoutChangedGravity(Gravity.END)
+                        // 设置拖拽边界值
+//                        .setBorder(100, 100,100,800)
+                        // 设置宽高是否充满父布局，直接在xml设置match_parent属性无效
+//                        .setMatchParent(widthMatch = false, heightMatch = false)
+                        // 设置浮窗的出入动画，可自定义，实现相应接口即可（策略模式），无需动画直接设置为null
+//                        .setAnimator(DefaultAnimator())
+                        // 设置系统浮窗的不需要显示的页面
+//                        .setFilter(MainActivity::class.java, SecondActivity::class.java)
+                // 设置系统浮窗的有效显示高度（不包含虚拟导航栏的高度），基本用不到，除非有虚拟导航栏适配问题
+//    .setDisplayHeight { context -> DisplayUtils.rejectedNavHeight(context) }
+            // 浮窗的一些状态回调，如：创建结果、显示、隐藏、销毁、touchEvent、拖拽过程、拖拽结束。
+            // ps：通过Kotlin DSL实现的回调，可以按需复写方法，用到哪个写哪个
+                        .show();
 
                 Log.e(TAG, "等待实现open");
                 break;
