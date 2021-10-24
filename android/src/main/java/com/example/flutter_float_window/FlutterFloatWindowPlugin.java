@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.lzf.easyfloat.EasyFloat;
+
 import io.flutter.Log;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
@@ -73,16 +75,24 @@ public class FlutterFloatWindowPlugin implements FlutterPlugin, MethodCallHandle
                 }
                 break;
             case "open":
+                if (activity != null) {
+                    Log.e(TAG,"进入到里面,,activity != null");
+                    EasyFloat.with(activity).setLayout(R.layout.item).show();
+                } else {
+                    EasyFloat.with(context).setLayout(R.layout.item).show();
+                }
+
                 Log.e(TAG,"等待实现open");
                 break;
             case "hide":
-                Log.e(TAG,"等待实现hide");
+                Log.e(TAG, "等待实现hide");
                 break;
             case "show":
-                Log.e(TAG,"等待实现show");
+                EasyFloat.show();
+                Log.e(TAG, "等待实现show");
                 break;
             case "dismiss":
-                Log.e(TAG,"等待实现dismiss");
+                Log.e(TAG, "等待实现dismiss");
                 break;
             default:
                 result.notImplemented();
